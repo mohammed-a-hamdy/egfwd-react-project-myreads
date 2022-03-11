@@ -13,6 +13,7 @@ function Content(props) {
   return (
     <div className="block  has-background-light">
       <NavBar pages={props.pages} />
+      <div className="container">
       <input className="input" type="text" placeholder="Search"
       value={searchText}
       onChange={handleSearchTextChange}
@@ -25,6 +26,8 @@ function Content(props) {
           ></Shelf>
         </div>
       </div>
+      </div>
+    
     </div>
   );
 }

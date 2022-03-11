@@ -10,7 +10,7 @@ function Content(props) {
     if (!props.search) {
       getAll()
         .then((res) => {
-          console.log(res);
+      
           setBooks(res);
         })
         .catch((e) => {
@@ -22,7 +22,7 @@ function Content(props) {
       } else {
         search(props.search)
           .then((res) => {
-            console.log(res);
+       
             if (Array.isArray(res)) {
               setBooks(res);
             } else {
@@ -34,23 +34,27 @@ function Content(props) {
           });
       }
     }
+
+    return function clean(){
+        setBooks([]);
+    }
   }, [props.search]);
   return (
-    <div className="block">
+    <div className="container">
       <h1 className="title block">{props.shelfTitle}</h1>
       <div className="columns is-multiline">
         {props.search
           ? books.map((book) => (
-              <div className="column">
-                <Book key={book.id} book={book} />
+              <div   key={book.id} className="column is-one-quarter">
+                <Book  book={book} />
               </div>
             ))
           : books
               .filter((book) => props.shelf === book.shelf)
               .map((book) => 
               
-              <div className="column">
-              <Book key={book.id} book={book} />
+              <div  key={book.id} className="column">
+              <Book book={book} />
             </div>
               )}
       </div>

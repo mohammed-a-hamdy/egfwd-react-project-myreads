@@ -7,7 +7,8 @@ function Content(props) {
   return (
     <div className="block  has-background-light">
       <NavBar pages={props.pages} />
-      <div className="columns">
+      <div className="container">
+      <div className="columns ">
         <div className="column">
           <Shelf
             shelf={"currentlyReading"}
@@ -21,6 +22,8 @@ function Content(props) {
           <Shelf shelf={"read"} shelfTitle={"Read Already Shelf"}></Shelf>
         </div>
       </div>
+      </div>
+     
     </div>
   );
 }

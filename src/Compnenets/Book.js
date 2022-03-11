@@ -11,19 +11,23 @@ function Content(props) {
       : get(props.book.id).then((res) => {
           setBookState(res.shelf);
         });
+
+        return function clean(){
+          setBookState("none");
+      } 
   }, []);
 
   const changeBookShelf = (shelf) => {
     const book = props.book;
     update(book, shelf)
       .then((res) => {
-        console.log(res);
+        
         setBookState(shelf);
       })
       .catch((e) => {});
   };
   return (
-    <div className="block">
+   
       <div className="card block">
         <div className="card-image">
           <img
@@ -51,9 +55,7 @@ function Content(props) {
         </div>
 
         <div className="card-footer block">
-          <div className="card-footer-item">
-            <div className="subtitle is-size-4">Move to ...</div>
-          </div>
+         
           <div className="card-footer-item">
             <div className="buttons">
               <button
@@ -100,7 +102,7 @@ function Content(props) {
           </div>
         </div>
       </div>
-    </div>
+  
   );
 }
 
