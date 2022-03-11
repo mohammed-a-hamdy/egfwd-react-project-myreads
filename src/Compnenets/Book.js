@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "bulma/css/bulma.min.css";
-import { update } from "../BookAPI";
+import { update, get } from "../BookAPI";
 
 function Content(props) {
   const [bookstate, setBookState] = useState("none");
 
   useEffect(() => {
-    setBookState(props.book.shelf);
+    props.book.shelf
+      ? setBookState(props.book.shelf)
+      : get(props.book.id).then((res) => {
+          setBookState(res.shelf);
+        });
   }, []);
 
   const changeBookShelf = (shelf) => {
@@ -15,7 +19,6 @@ function Content(props) {
       .then((res) => {
         console.log(res);
         setBookState(shelf);
-        
       })
       .catch((e) => {});
   };
@@ -23,15 +26,28 @@ function Content(props) {
     <div className="block">
       <div className="card block">
         <div className="card-image">
-          <img src={props.book.imageLinks.smallThumbnail}></img>
+          <img
+            src={
+              props.book.imageLinks
+                ? props.book.imageLinks.smallThumbnail
+                : process.env.PUBLIC_URL + "/icon.png"
+            }
+            width="200"
+            height="200"
+          ></img>
         </div>
         <div className="card-content">
-          <h1 className="subtitle is-3">{props.book.title}</h1>
-          {props.book.authors.map((author) => (
-            <h2 key={author} className="subtitle is-5">
-              {author}
-            </h2>
-          ))}
+          <h1 className="subtitle is-3">
+            {props.book.title ? props.book.title : "No title"}
+          </h1>
+
+          {props.book.authors
+            ? props.book.authors.map((author) => (
+                <h2 key={author} className="subtitle is-5">
+                  {author}
+                </h2>
+              ))
+            : "no authors"}
         </div>
 
         <div className="card-footer block">
@@ -82,7 +98,6 @@ function Content(props) {
               </button>
             </div>
           </div>
-          
         </div>
       </div>
     </div>

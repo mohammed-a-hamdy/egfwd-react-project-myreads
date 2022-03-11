@@ -1,28 +1,59 @@
 import React, { useState, useEffect } from "react";
 import "bulma/css/bulma.min.css";
 import Book from "./Book";
-import { getAll } from "../BookAPI";
+import { getAll, search } from "../BookAPI";
 
 function Content(props) {
-  const [userBooks, setUserBooks] = React.useState([]);
+  const [books, setBooks] = React.useState([]);
 
   React.useEffect(() => {
-    getAll().then((res) => {
-      console.log(res);
-      setUserBooks(res);
-    }).catch((e)=>{
-        setUserBooks([]);
-    });
-  }, []);
+    if (!props.search) {
+      getAll()
+        .then((res) => {
+          console.log(res);
+          setBooks(res);
+        })
+        .catch((e) => {
+          setBooks([]);
+        });
+    } else {
+      if (props.search === "") {
+        setBooks([]);
+      } else {
+        search(props.search)
+          .then((res) => {
+            console.log(res);
+            if (Array.isArray(res)) {
+              setBooks(res);
+            } else {
+              setBooks([]);
+            }
+          })
+          .catch((e) => {
+            setBooks([]);
+          });
+      }
+    }
+  }, [props.search]);
   return (
     <div className="block">
       <h1 className="title block">{props.shelfTitle}</h1>
-      {userBooks
-        .filter((book) => props.shelf === book.shelf)
-        .map((book) => (
-            <Book key={book.id}
-            book={book}/>
-        ))}
+      <div className="columns is-multiline">
+        {props.search
+          ? books.map((book) => (
+              <div className="column">
+                <Book key={book.id} book={book} />
+              </div>
+            ))
+          : books
+              .filter((book) => props.shelf === book.shelf)
+              .map((book) => 
+              
+              <div className="column">
+              <Book key={book.id} book={book} />
+            </div>
+              )}
+      </div>
     </div>
   );
 }
