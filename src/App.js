@@ -1,15 +1,20 @@
+import React from "react";
 import "bulma/css/bulma.min.css";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+import Main from "./Pages/Main";
+import Search from "./Pages/Search";
+import Notfound from "./Pages/Notfound";
 
 function App() {
   return (
-    <div class="columns">
-      <div class="column">
-        <button class="button is-primary">Primary</button>
-      </div>
-      <div class="column">Second column</div>
-      <div class="column">Third column</div>
-      <div class="column">Fourth column</div>
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route exact path="/" element={<Main/>}></Route>
+      <Route exact path="/search" element={<Search/>}></Route>
+      <Route path="*" element={<Notfound/>}></Route>
+    </Routes>
+    </BrowserRouter>
+    
   );
 }
 
