@@ -3,7 +3,7 @@ import "bulma/css/bulma.min.css";
 import NavBar from "../Compnenets/Nav";
 import Shelf from "../Compnenets/Shelf";
 
-function Content(props) {
+function Content() {
   const [searchText,setSearchText] = useState('');
 
   const handleSearchTextChange = (event) =>{
@@ -12,7 +12,6 @@ function Content(props) {
 
   return (
     <div className="block  has-background-light">
-      <NavBar pages={props.pages} />
       <div className="container">
       <input className="input" type="text" placeholder="Search"
       value={searchText}

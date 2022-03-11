@@ -4,6 +4,7 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Main from "./Pages/Main";
 import Search from "./Pages/Search";
 import Notfound from "./Pages/Notfound";
+import NavBar from "./Compnenets/Nav";
 
 function App() {
   const pages = [
@@ -12,9 +13,11 @@ function App() {
   ];
   return (
     <BrowserRouter>
+    <NavBar pages={pages} />
       <Routes>
-        <Route exact path="/" element={<Main pages={pages} />}></Route>
-        <Route exact path="/search" element={<Search pages={pages} />}></Route>
+      
+        <Route exact path="/" element={<Main />}></Route>
+        <Route exact path="/search" element={<Search />}></Route>
         <Route path="*" element={<Notfound />}></Route>
       </Routes>
     </BrowserRouter>

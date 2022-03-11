@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "bulma/css/bulma.min.css";
 import Shelf from "../Compnenets/Shelf";
-import NavBar from "../Compnenets/Nav";
 
-function Content(props) {
+
+function Content() {
   return (
     <div className="block  has-background-light">
-      <NavBar pages={props.pages} />
+      
       <div className="container">
       <div className="columns ">
         <div className="column">
