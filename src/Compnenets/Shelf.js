@@ -19,11 +19,9 @@ function Content(props) {
       <h1 className="title block">{props.shelfTitle}</h1>
       {userBooks
         .filter((book) => props.shelf === book.shelf)
-        .map((filterdBooks) => (
-            <Book key={filterdBooks.id}
-            thumb={filterdBooks.imageLinks.thumbnail}
-            title={filterdBooks.title}
-            authors={filterdBooks.authors}/>
+        .map((book) => (
+            <Book key={book.id}
+            book={book}/>
         ))}
     </div>
   );

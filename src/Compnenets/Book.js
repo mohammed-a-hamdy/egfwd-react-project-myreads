@@ -6,11 +6,11 @@ function Content(props) {
     <div className="block">
       <div className="card block">
         <div className="card-image">
-          <img src={props.thumb}></img>
+          <img src={props.book.imageLinks.smallThumbnail}></img>
         </div>
         <div className="card-content">
-          <h1 className="subtitle is-3">{props.title}</h1>
-          {props.authors.map((author) => (
+          <h1 className="subtitle is-3">{props.book.title}</h1>
+          {props.book.authors.map((author) => (
             <h2 key={author} className="subtitle is-5">
               {author}
             </h2>
