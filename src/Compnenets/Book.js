@@ -16,6 +16,7 @@ function Content(props) {
             </h2>
           ))}
         </div>
+        
       </div>
     </div>
   );
