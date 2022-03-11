@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bulma/css/bulma.min.css";
+import { update } from "../BookAPI";
 
 function Content(props) {
   const [bookstate, setBookState] = useState("none");
@@ -7,6 +8,17 @@ function Content(props) {
   useEffect(() => {
     setBookState(props.book.shelf);
   }, []);
+
+  const changeBookShelf = (shelf) => {
+    const book = props.book;
+    update(book, shelf)
+      .then((res) => {
+        console.log(res);
+        setBookState(shelf);
+        
+      })
+      .catch((e) => {});
+  };
   return (
     <div className="block">
       <div className="card block">
@@ -22,34 +34,55 @@ function Content(props) {
           ))}
         </div>
 
-        <div className="card-footer">
-          <div className="buttons">
-            <button
-              e="button is-light"
-              className={`button ${
-                props.book.shelf === "currentlyReading"
-                  ? "is-success"
-                  : "is-light"
-              }`}
-            >
-              Currently Reading
-            </button>
-            <button
-              className={`button ${
-                props.book.shelf === "wantToRead" ? "is-success" : "is-light"
-              }`}
-            >
-              Want to Read
-            </button>
-            <button
-              className={`button ${
-                props.book.shelf === "read" ? "is-success" : "is-light"
-              }`}
-            >
-              Read
-            </button>
-            <button className="button is-light">None</button>
+        <div className="card-footer block">
+          <div className="card-footer-item">
+            <div className="subtitle is-size-4">Move to ...</div>
           </div>
+          <div className="card-footer-item">
+            <div className="buttons">
+              <button
+                className={`button ${
+                  bookstate === "currentlyReading" ? "is-success" : "is-light"
+                }`}
+                onClick={() => {
+                  changeBookShelf("currentlyReading");
+                }}
+              >
+                Currently Reading
+              </button>
+              <button
+                className={`button ${
+                  bookstate === "wantToRead" ? "is-success" : "is-light"
+                }`}
+                onClick={() => {
+                  changeBookShelf("wantToRead");
+                }}
+              >
+                Want to Read
+              </button>
+              <button
+                className={`button ${
+                  bookstate === "read" ? "is-success" : "is-light"
+                }`}
+                onClick={() => {
+                  changeBookShelf("read");
+                }}
+              >
+                Read
+              </button>
+              <button
+                className={`button ${
+                  bookstate === "none" ? "is-success" : "is-light"
+                }`}
+                onClick={() => {
+                  changeBookShelf("none");
+                }}
+              >
+                None
+              </button>
+            </div>
+          </div>
+          
         </div>
       </div>
     </div>
