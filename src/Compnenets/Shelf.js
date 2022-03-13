@@ -6,11 +6,14 @@ import { getAll, search } from "../BookAPI";
 function Content(props) {
   const [books, setBooks] = React.useState([]);
 
+  /**
+   * @description Get books based on searchText
+   * @param {string} props.search
+   */
   React.useEffect(() => {
     if (!props.search) {
       getAll()
         .then((res) => {
-      
           setBooks(res);
         })
         .catch((e) => {
@@ -22,7 +25,6 @@ function Content(props) {
       } else {
         search(props.search)
           .then((res) => {
-       
             if (Array.isArray(res)) {
               setBooks(res);
             } else {
@@ -35,28 +37,31 @@ function Content(props) {
       }
     }
 
-    return function clean(){
-        setBooks([]);
-    }
+    return function clean() {
+      setBooks([]);
+    };
   }, [props.search]);
   return (
     <div className="container">
       <h1 className="title block">{props.shelfTitle}</h1>
       <div className="columns is-multiline">
+        {/**
+         * @description Dual usage of Book compnenet, showing search results as long as homepage shelfs
+         * @param {string} searchText
+         */}
         {props.search
           ? books.map((book) => (
-              <div   key={book.id} className="column is-one-quarter">
-                <Book  book={book} />
+              <div key={book.id} className="column is-one-quarter">
+                <Book book={book} />
               </div>
             ))
           : books
               .filter((book) => props.shelf === book.shelf)
-              .map((book) => 
-              
-              <div  key={book.id} className="column">
-              <Book book={book} />
-            </div>
-              )}
+              .map((book) => (
+                <div key={book.id} className="column">
+                  <Book book={book} />
+                </div>
+              ))}
       </div>
     </div>
   );

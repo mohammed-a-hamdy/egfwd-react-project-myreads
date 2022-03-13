@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "bulma/css/bulma.min.css";
 
+/**
+ * @description Get Buttons
+ * @param {string} Button link
+ * @param {string} Button name
+ */
 function Content(props) {
   return (
     <nav className="navbar has-background-light" role="navigation">

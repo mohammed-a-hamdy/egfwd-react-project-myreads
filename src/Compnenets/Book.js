@@ -3,6 +3,10 @@ import "bulma/css/bulma.min.css";
 import { update, get } from "../BookAPI";
 
 function Content(props) {
+  /**
+   * @description Change book shelf
+   * @param {string} Shelf name
+   */
   const [bookstate, setBookState] = useState("none");
 
   useEffect(() => {
@@ -16,7 +20,10 @@ function Content(props) {
       setBookState("none");
     };
   }, []);
-
+  /**
+   * @description Change book shelf 
+   * @param {string} Shelf name
+   */
   const changeBookShelf = (shelf) => {
     const book = props.book;
     update(book, shelf)

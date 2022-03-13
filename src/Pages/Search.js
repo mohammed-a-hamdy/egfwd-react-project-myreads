@@ -5,7 +5,10 @@ import Shelf from "../Compnenets/Shelf";
 
 function Content() {
   const [searchText, setSearchText] = useState("");
-
+  /**
+   * @description Manage search state
+   * @param {string} searchText
+   */
   const handleSearchTextChange = (event) => {
     setSearchText(event.target.value);
   };
