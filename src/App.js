@@ -13,9 +13,8 @@ function App() {
   ];
   return (
     <BrowserRouter>
-    <NavBar pages={pages} />
+      <NavBar pages={pages} />
       <Routes>
-      
         <Route exact path="/" element={<Main />}></Route>
         <Route exact path="/search" element={<Search />}></Route>
         <Route path="*" element={<Notfound />}></Route>

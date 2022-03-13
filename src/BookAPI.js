@@ -14,13 +14,13 @@ export const get = (bookId) =>
     .then((res) => res.json())
     .then((data) => data.book);
 
-    /** Get User books */
+/** Get User books */
 export const getAll = () =>
   fetch(`${api}/books`, { headers })
     .then((res) => res.json())
     .then((data) => data.books);
 
-    /** Change shelf */
+/** Change shelf */
 export const update = (book, shelf) =>
   fetch(`${api}/books/${book.id}`, {
     method: "PUT",
