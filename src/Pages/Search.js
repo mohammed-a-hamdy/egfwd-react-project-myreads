@@ -25,7 +25,9 @@ function Content() {
         ></input>
         <div className="columns">
           <div className="column">
-            <Shelf search={searchText} shelfTitle={"Search Result"}></Shelf>
+            <Shelf
+             search={searchText} 
+             shelfTitle={"Search Result"}></Shelf>
           </div>
         </div>
       </div>

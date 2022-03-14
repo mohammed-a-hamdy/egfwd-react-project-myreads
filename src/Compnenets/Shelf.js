@@ -1,35 +1,31 @@
 import React, { useState, useEffect } from "react";
 import "bulma/css/bulma.min.css";
 import Book from "./Book";
-import { getAll, search } from "../BookAPI";
+import { getAll, searchAll } from "../BookAPI";
 
 function Content(props) {
   const [books, setBooks] = React.useState([]);
-  const {search,shelf,shelfTitle} = props;
+  const { search, shelf, shelfTitle } = props;
 
   /**
    * @description Get books based on searchText
    * @param {string} search
    */
   React.useEffect(() => {
-    if (!search) {
-      setBooks(shelf);
+    if (search === "") {
+      setBooks([]);
     } else {
-      if (search === "") {
-        setBooks([]);
-      } else {
-        search(search)
-          .then((res) => {
-            if (Array.isArray(res)) {
-              setBooks(res);
-            } else {
-              setBooks([]);
-            }
-          })
-          .catch((e) => {
+      searchAll(search)
+        .then((res) => {
+          if (Array.isArray(res)) {
+            setBooks(res);
+          } else {
             setBooks([]);
-          });
-      }
+          }
+        })
+        .catch((e) => {
+          setBooks([]);
+        });
     }
 
     return function clean() {
