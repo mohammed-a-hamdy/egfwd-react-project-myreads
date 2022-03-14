@@ -12,7 +12,10 @@ function Content(props) {
    * @param {string} search
    */
   React.useEffect(() => {
-    if (search === "") {
+    if(!search && shelf){
+      setBooks(shelf);
+    }
+   else if (search === "") {
       setBooks([]);
     } else {
       searchAll(search)

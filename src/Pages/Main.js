@@ -3,10 +3,9 @@ import "bulma/css/bulma.min.css";
 import Shelf from "../Compnenets/Shelf";
 import { getAll } from "../BookAPI";
 
-
 function Content() {
   const [userbooks, setUserBooks] = React.useState([]);
-  React.useEffect(() => {
+  React.useEffect(() => { 
     getAll()
       .then((res) => {
         setUserBooks(res);
@@ -19,34 +18,32 @@ function Content() {
     };
   }, []);
   return (
-    
-      <div className="block  has-background-light">
-        <div className="container">
-          <div className="columns">
-            <div className="column">
-              <Shelf
-                shelf={userbooks.filter(
-                  (book) => book.shelf === "currentlyReading"
-                )}
-                shelfTitle={"Currently Reading Shelf"}
-              ></Shelf>
-            </div>
-            <div className="column">
-              <Shelf
-                shelf={userbooks.filter((book) => book.shelf === "wantToRead")}
-                shelfTitle={"Want to Read Shelf"}
-              ></Shelf>
-            </div>
-            <div className="column">
-              <Shelf
-                shelf={userbooks.filter((book) => book.shelf === "read")}
-                shelfTitle={"Read Already Shelf"}
-              ></Shelf>
-            </div>
+    <div className="block  has-background-light">
+      <div className="container">
+        <div className="columns">
+          <div className="column">
+            <Shelf
+              shelf={userbooks.filter(
+                (book) => book.shelf === "currentlyReading"
+              )}
+              shelfTitle={"Currently Reading Shelf"}
+            ></Shelf>
+          </div>
+          <div className="column">
+            <Shelf
+              shelf={userbooks.filter((book) => book.shelf === "wantToRead")}
+              shelfTitle={"Want to Read Shelf"}
+            ></Shelf>
+          </div>
+          <div className="column">
+            <Shelf
+              shelf={userbooks.filter((book) => book.shelf === "read")}
+              shelfTitle={"Read Already Shelf"}
+            ></Shelf>
           </div>
         </div>
       </div>
-
+    </div>
   );
 }
 
