@@ -2,15 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import "bulma/css/bulma.min.css";
 import { update, get } from "../BookAPI";
 
-
 function Content(props) {
   /**
    * @description Change book shelf
    * @param {string} Shelf name
    */
   const [bookstate, setBookState] = useState("none");
-  const {shelf,id,authors,title,imageLinks} = props.book;
-
+  const { shelf, id, authors, title, imageLinks } = props.book;
 
   useEffect(() => {
     shelf
@@ -24,7 +22,7 @@ function Content(props) {
     };
   }, []);
   /**
-   * @description Change book shelf 
+   * @description Change book shelf
    * @param {string} Shelf name
    */
   const changeBookShelf = (shelf) => {
@@ -32,6 +30,8 @@ function Content(props) {
     update(book, shelf)
       .then((res) => {
         setBookState(shelf);
+        book.shelf = shelf;
+        props.Changeshelf(book);
       })
       .catch((e) => {});
   };
@@ -49,9 +49,7 @@ function Content(props) {
         ></img>
       </div>
       <div className="card-content">
-        <h1 className="subtitle is-3">
-          {title ? title : "No title"}
-        </h1>
+        <h1 className="subtitle is-3">{title ? title : "No title"}</h1>
 
         {authors
           ? authors.map((author) => (

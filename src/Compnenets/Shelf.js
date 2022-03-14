@@ -6,16 +6,14 @@ import { getAll, searchAll } from "../BookAPI";
 function Content(props) {
   const [books, setBooks] = React.useState([]);
   const { search, shelf, shelfTitle } = props;
-
   /**
    * @description Get books based on searchText
    * @param {string} search
    */
   React.useEffect(() => {
-    if(!search && shelf){
+    if (!search && shelf) {
       setBooks(shelf);
-    }
-   else if (search === "") {
+    } else if (search === "") {
       setBooks([]);
     } else {
       searchAll(search)
@@ -51,7 +49,8 @@ function Content(props) {
             ))
           : books.map((book) => (
               <div key={book.id} className="column">
-                <Book book={book} />
+                <Book book={book}
+                Changeshelf={(book)=>props.Changeshelf(book)} />
               </div>
             ))}
       </div>
