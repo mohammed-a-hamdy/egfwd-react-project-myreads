@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "bulma/css/bulma.min.css";
+import Swal from "sweetalert2";
 import { update, get } from "../BookAPI";
 
 function Content(props) {
@@ -26,9 +27,11 @@ function Content(props) {
    * @param {string} Shelf name
    */
   const changeBookShelf = (shelf) => {
+    Swal.showLoading();
     const book = props.book;
     update(book, shelf)
       .then((res) => {
+        Swal.close();
         setBookState(shelf);
         book.shelf = shelf;
         props.Changeshelf(book);

@@ -14,7 +14,7 @@ function Content() {
   };
 
   return (
-    <div className="block  has-background-light">
+    <div className="block has-background-light">
       <div className="container">
         <input
           className="input"
