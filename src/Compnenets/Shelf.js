@@ -12,13 +12,7 @@ function Content(props) {
    */
   React.useEffect(() => {
     if (!props.search) {
-      getAll()
-        .then((res) => {
-          setBooks(res);
-        })
-        .catch((e) => {
-          setBooks([]);
-        });
+      setBooks(props.shelf);
     } else {
       if (props.search === "") {
         setBooks([]);
@@ -40,7 +34,7 @@ function Content(props) {
     return function clean() {
       setBooks([]);
     };
-  }, [props.search]);
+  }, [props.search, props.shelf]);
   return (
     <div className="container">
       <h1 className="title block">{props.shelfTitle}</h1>
@@ -55,13 +49,11 @@ function Content(props) {
                 <Book book={book} />
               </div>
             ))
-          : books
-              .filter((book) => props.shelf === book.shelf)
-              .map((book) => (
-                <div key={book.id} className="column">
-                  <Book book={book} />
-                </div>
-              ))}
+          : books.map((book) => (
+              <div key={book.id} className="column">
+                <Book book={book} />
+              </div>
+            ))}
       </div>
     </div>
   );

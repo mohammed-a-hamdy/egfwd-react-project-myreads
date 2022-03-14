@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "bulma/css/bulma.min.css";
 import { update, get } from "../BookAPI";
+
 
 function Content(props) {
   /**
@@ -8,6 +9,7 @@ function Content(props) {
    * @param {string} Shelf name
    */
   const [bookstate, setBookState] = useState("none");
+
 
   useEffect(() => {
     props.book.shelf
