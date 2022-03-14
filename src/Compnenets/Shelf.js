@@ -5,19 +5,20 @@ import { getAll, search } from "../BookAPI";
 
 function Content(props) {
   const [books, setBooks] = React.useState([]);
+  const {search,shelf,shelfTitle} = props;
 
   /**
    * @description Get books based on searchText
-   * @param {string} props.search
+   * @param {string} search
    */
   React.useEffect(() => {
-    if (!props.search) {
-      setBooks(props.shelf);
+    if (!search) {
+      setBooks(shelf);
     } else {
-      if (props.search === "") {
+      if (search === "") {
         setBooks([]);
       } else {
-        search(props.search)
+        search(search)
           .then((res) => {
             if (Array.isArray(res)) {
               setBooks(res);
@@ -34,16 +35,16 @@ function Content(props) {
     return function clean() {
       setBooks([]);
     };
-  }, [props.search, props.shelf]);
+  }, [search, shelf]);
   return (
     <div className="container">
-      <h1 className="title block">{props.shelfTitle}</h1>
+      <h1 className="title block">{shelfTitle}</h1>
       <div className="columns is-multiline">
         {/**
          * @description Dual usage of Book compnenet, showing search results as long as homepage shelfs
          * @param {string} searchText
          */}
-        {props.search
+        {search
           ? books.map((book) => (
               <div key={book.id} className="column is-one-quarter">
                 <Book book={book} />

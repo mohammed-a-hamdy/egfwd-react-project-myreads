@@ -9,12 +9,13 @@ function Content(props) {
    * @param {string} Shelf name
    */
   const [bookstate, setBookState] = useState("none");
+  const {shelf,id,authors,title,imageLinks} = props.book;
 
 
   useEffect(() => {
-    props.book.shelf
-      ? setBookState(props.book.shelf)
-      : get(props.book.id).then((res) => {
+    shelf
+      ? setBookState(shelf)
+      : get(id).then((res) => {
           setBookState(res.shelf);
         });
 
@@ -39,8 +40,8 @@ function Content(props) {
       <div className="card-image">
         <img
           src={
-            props.book.imageLinks
-              ? props.book.imageLinks.smallThumbnail
+            imageLinks
+              ? imageLinks.smallThumbnail
               : process.env.PUBLIC_URL + "/icon.png"
           }
           width="200"
@@ -49,11 +50,11 @@ function Content(props) {
       </div>
       <div className="card-content">
         <h1 className="subtitle is-3">
-          {props.book.title ? props.book.title : "No title"}
+          {title ? title : "No title"}
         </h1>
 
-        {props.book.authors
-          ? props.book.authors.map((author) => (
+        {authors
+          ? authors.map((author) => (
               <h2 key={author} className="subtitle is-5">
                 {author}
               </h2>
