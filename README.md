@@ -1,5 +1,8 @@
 # My Reads Project
 
+## Background
+#### This project is part of Udacity training React nanaodegree offerd by egFWD.
+
 ## About
 #### My reads is a simple software that let's you manage your book collection into 3 categorise Read, Currently reading, Want to read or even add more books to your collections.
 #### 
